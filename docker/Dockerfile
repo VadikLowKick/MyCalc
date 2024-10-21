@@ -1,0 +1,31 @@
+# Используем официальный образ с C++ и CMake
+FROM ubuntu:22.04
+
+# Установим необходимые пакеты
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    libgtest-dev \
+    && apt-get clean
+
+# Google Test компилируется отдельно, его нужно собрать
+RUN cd /usr/src/gtest && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && \
+    cd lib && \
+    cp *.a /usr/lib
+
+# Устанавливаем рабочую директорию
+WORKDIR /app
+
+# Копируем необходимые файлы в контейнер
+COPY .. /app
+
+# Делаем скрипт исполняемым и запускаем его
+RUN chmod u+x /app/buildCalc.sh && /app/buildCalc.sh
+
+# Запускаем скрипт для сборки и тестирования
+CMD ["bash", "buildCalc.sh"]
