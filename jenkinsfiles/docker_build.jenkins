@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('.') {
-                	sh 'docker build docker/Dockerfile .'
+                	sh 'docker build -t mycalc -f docker/Dockerfile .'
                 }
             }
         }
