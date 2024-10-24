@@ -4,7 +4,9 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent {
-        dockerfile true
+        dockerfile {
+            dir './docker'
+        }
     }
     stages {
         stage('Test') {
