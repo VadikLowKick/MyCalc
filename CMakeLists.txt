@@ -18,6 +18,6 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(CalculatorTests tests/calculator_tests.cpp)
-target_link_libraries(CalculatorTests Calculator ${GTEST_LIBRARIES} pthread)
+target_link_libraries(CalculatorTests Calculator GTest::GTest GTest::Main)
 
 add_test(NAME CalculatorTests COMMAND CalculatorTests)

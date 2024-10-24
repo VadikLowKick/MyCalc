@@ -17,7 +17,3 @@ double Calculator::divide(double a, double b) {
     if (b == 0) throw std::invalid_argument("Division by zero");
     return a / b;
 }
-
-int main(){
-    return 0;
-}

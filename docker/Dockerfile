@@ -23,9 +23,3 @@ WORKDIR /app
 
 # Копируем необходимые файлы в контейнер
 COPY .. /app
-
-# Делаем скрипт исполняемым и запускаем его
-RUN chmod u+x /app/buildCalc.sh && /app/buildCalc.sh
-
-# Запускаем скрипт для сборки и тестирования
-CMD ["bash", "buildCalc.sh"]

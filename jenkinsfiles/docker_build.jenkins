@@ -15,8 +15,14 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('.') {
-                	sh 'docker build docker/Dockerfile .'
+                	sh 'docker build myCalc docker/Dockerfile .'
                 }
+            }
+        }
+        stage("run tests") {
+            steps {
+                echo " ============== running tests =================="
+                sh 'docker run --rm myCalc ./buildCalc.sh'  // Запускаем контейнер и выполняем тесты
             }
         }
     }
