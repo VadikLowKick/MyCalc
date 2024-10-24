@@ -25,4 +25,4 @@ WORKDIR /app
 COPY .. /app
 
 # Делаем скрипт исполняемым и запускаем его
-RUN ls /app
+RUN chmod u+x /app/buildCalc.sh && /app/buildCalc.sh
