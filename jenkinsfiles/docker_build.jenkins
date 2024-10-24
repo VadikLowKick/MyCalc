@@ -6,6 +6,7 @@ pipeline {
     agent { 
         label 'built-in'
         }
+    triggers { pollSCM('* * * * *') }
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
@@ -15,7 +16,11 @@ pipeline {
             steps {
                 echo " ============== start building image =================="
                 dir ('.') {
-                	sh 'docker build myCalc docker/Dockerfile .'
+<<<<<<< HEAD
+                	sh 'docker build -t mycalc -f docker/Dockerfile .'
+=======
+                	sh 'docker build -t mycalc -f docker/Dockerfile .'
+>>>>>>> d8b3f9b2fcae0faf3e346f24e139c63037c541f1
                 }
             }
         }
