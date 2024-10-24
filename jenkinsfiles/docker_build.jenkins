@@ -23,7 +23,7 @@ pipeline {
         stage("run tests") {
             steps {
                 echo " ============== running tests =================="
-                sh 'docker run -it --rm mycalc'  // Запускаем контейнер и выполняем тесты
+                sh 'docker run -it --rm mycalc ctest'  // Запускаем контейнер и выполняем тесты
             }
         }
     }
