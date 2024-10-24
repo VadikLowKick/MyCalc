@@ -12,7 +12,10 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'ls -l'
+                sh '''
+                    bash buildCalc.sh
+                    ./build/bin/CalculatorTests
+                '''
             }
         }
     }
