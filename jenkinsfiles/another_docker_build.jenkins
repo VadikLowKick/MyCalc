@@ -5,6 +5,7 @@ properties([disableConcurrentBuilds()])
 pipeline {
     agent {
         dockerfile {
+            label 'Dockerfile'
             dir './docker'
         }
     }
