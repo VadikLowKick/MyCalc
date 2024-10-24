@@ -4,14 +4,12 @@ properties([disableConcurrentBuilds()])
 
 pipeline {
     agent {
-        docker { 
-            image "mycalc:${env.BUILD_ID}"
-         }
+        dockerfile true
     }
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'nano --version'
             }
         }
     }
