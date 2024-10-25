@@ -18,8 +18,5 @@ RUN cd /usr/src/gtest && \
     cd lib && \
     cp *.a /usr/lib
 
-# Устанавливаем рабочую директорию
-WORKDIR /app
-
 # Копируем необходимые файлы в контейнер
 COPY .. /app
