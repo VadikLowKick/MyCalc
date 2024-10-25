@@ -18,8 +18,12 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    bash buildCalc.sh
-                    ./build/bin/CalculatorTests
+                    rm -r build
+                    mkdir build
+                    cd build
+                    cmake ..
+                    make
+                    ./bin/CalculatorTests
                 '''
             }
         }
