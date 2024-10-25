@@ -29,7 +29,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    ./bin/CalculatorTests
+                    ./build/bin/CalculatorTests
                 '''
             }
         }
