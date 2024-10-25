@@ -15,7 +15,7 @@ pipeline {
         timestamps()
     } 
     stages {
-        stage('Test') {
+        stage('Build') {
             steps {
                 sh '''
                     rm -r build
@@ -23,6 +23,12 @@ pipeline {
                     cd build
                     cmake ..
                     make
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '''
                     ./bin/CalculatorTests
                 '''
             }
