@@ -18,7 +18,6 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    rm -r build
                     mkdir build
                     cd build
                     cmake ..
