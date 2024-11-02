@@ -36,6 +36,7 @@ pipeline {
             post {
               always {
                junit 'build/report.xml'
+               allure includeProperties: false, reportBuildPolicy: 'ALWAYS', results: [[path: 'build/allure-results']]
               }
             }
         }
