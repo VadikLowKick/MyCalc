@@ -20,4 +20,5 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(CalculatorTests tests/calculator_tests.cpp)
 target_link_libraries(CalculatorTests Calculator GTest::GTest GTest::Main)
 
-add_test(NAME CalculatorTests COMMAND CalculatorTests)
+add_test(NAME CalculatorTests COMMAND CalculatorTests --gtest_output=xml:report.xml)
+message("Report path: ${CMAKE_BINARY_DIR}/report.xml")
