@@ -18,5 +18,3 @@ RUN cd /usr/src/gtest && \
     cd lib && \
     cp *.a /usr/lib
 
-# Копируем необходимые файлы в контейнер
-COPY .. /app
