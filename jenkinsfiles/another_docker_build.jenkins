@@ -29,8 +29,14 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    ./build/bin/CalculatorTests
+                    cd build/
+                    ctest
                 '''
+            }
+            post {
+              always {
+               junit 'build/report.xml'
+              }
             }
         }
     }
