@@ -13,7 +13,6 @@ pipeline {
     options {
         buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
         timestamps()
-        wsCleanup()
     } 
     stages {
         stage('Build') {
@@ -38,6 +37,11 @@ pipeline {
               always {
                junit 'build/report.xml'
               }
+            }
+        }
+        stage('Post Build Cleanup') {
+            steps {
+                cleanWs() // Очистка после завершения всех шагов
             }
         }
     }
