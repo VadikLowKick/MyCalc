@@ -2,6 +2,6 @@
 rm -r build
 mkdir build
 cd build
-cmake ..
+cmake -DBUILD_TESTS=ON ..
 make
 

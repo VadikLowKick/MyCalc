@@ -20,7 +20,7 @@ pipeline {
                 sh '''
                     mkdir build
                     cd build
-                    cmake ..
+                    cmake -DBUILD_TESTS=ON ..
                     make
                 '''
             }
@@ -38,9 +38,15 @@ pipeline {
               }
             }
         }
+        stage('Archive Artifacts') {
+            steps {
+                sh 'tar -czf artifacts.tar.gz libcalculator_lib.a MyCalc CalculatorTests'
+            }
+        }
     }
     post{
         always{
+            archiveArtifacts artifacts: 'build/artifacts.tar.gz'
             cleanWs()
         }
     }

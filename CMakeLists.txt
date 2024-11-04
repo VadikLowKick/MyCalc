@@ -4,8 +4,11 @@ project(MyCalc)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-# Создаем статическую библиотеку из calculator.cpp
 
+# Опция для включения или отключения тестов
+option(BUILD_TESTS "Build tests" ON)
+
+# Создаем статическую библиотеку из calculator.cpp
 add_library(calculator_lib STATIC src/calculator.cpp)
 
 # Подключаем заголовочный файл к библиотеке
@@ -16,13 +19,17 @@ add_executable(MyCalc src/main.cpp)
 target_link_libraries(MyCalc PRIVATE calculator_lib)
 
 
-enable_testing()
 
-find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
+if (BUILD_TESTS)
+    enable_testing()
 
-add_executable(CalculatorTests tests/calculator_tests.cpp)
-target_link_libraries(CalculatorTests calculator_lib GTest::GTest GTest::Main)
+    find_package(GTest REQUIRED)
+    include_directories(${GTEST_INCLUDE_DIRS})
 
-add_test(NAME CalculatorTests COMMAND CalculatorTests --gtest_output=xml:report.xml)
-message("Report path: ${CMAKE_BINARY_DIR}/report.xml")
+    add_executable(CalculatorTests tests/calculator_tests.cpp)
+    target_link_libraries(CalculatorTests calculator_lib GTest::GTest GTest::Main)
+
+    add_test(NAME CalculatorTests COMMAND CalculatorTests --gtest_output=xml:report.xml)
+
+    message("Report path: ${CMAKE_BINARY_DIR}/report.xml")
+endif()
