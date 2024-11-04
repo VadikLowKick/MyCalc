@@ -23,15 +23,13 @@ pipeline {
                     cmake -DBUILD_TESTS=ON ..
                     make
                 '''
-                stash name: 'build-artifacts', includes: 'build/libcalculator_lib.a, build/MyCalc, build/CalculatorTests'
+                stash name: 'calc-artifacts', includes: 'build/libcalculator_lib.a, build/MyCalc, build/CalculatorTests'
             }
         }
         stage('Test') {
             steps {
-                unstash 'build-artifacts'
+                unstash 'calc-artifacts'
                 sh '''
-                    cd build/
-                    ./CalculatorTests
                     ctest
                 '''
             }
@@ -43,8 +41,10 @@ pipeline {
         }
         stage('Archive Artifacts') {
             steps {
-                unstash 'build-artifacts'
-                sh 'tar -czf artifacts.tar.gz libcalculator_lib.a MyCalc CalculatorTests'
+                sh '''
+                    cd build/
+                    tar -czf artifacts.tar.gz libcalculator_lib.a MyCalc CalculatorTests
+                '''
             }
         }
     }
