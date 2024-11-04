@@ -5,4 +5,16 @@ FROM ubuntu:22.04
 RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
-    git
+    git \
+    libgtest-dev \
+    && apt-get clean
+
+# Google Test компилируется отдельно, его нужно собрать
+RUN cd /usr/src/gtest && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && \
+    cd lib && \
+    cp *.a /usr/lib
+

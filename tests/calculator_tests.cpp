@@ -22,3 +22,8 @@ TEST(CalculatorTest, Divide) {
     EXPECT_DOUBLE_EQ(calc.divide(10.0, 2.0), 5.0);
     EXPECT_THROW(calc.divide(10.0, 0), std::invalid_argument);
 }
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
