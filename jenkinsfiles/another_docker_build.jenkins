@@ -40,7 +40,10 @@ pipeline {
         }
         stage('Archive Artifacts') {
             steps {
-                sh 'tar -czf artifacts.tar.gz libcalculator_lib.a MyCalc CalculatorTests'
+                sh '''
+                    cd build/
+                    tar -czf artifacts.tar.gz libcalculator_lib.a MyCalc CalculatorTests
+                '''
             }
         }
     }
