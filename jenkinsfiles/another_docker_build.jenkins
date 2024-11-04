@@ -28,13 +28,13 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    cd build/
+                    cd build/tests
                     ctest
                 '''
             }
             post {
               always {
-               junit 'build/report.xml'
+               junit 'build/tests/report.xml'
               }
             }
         }
