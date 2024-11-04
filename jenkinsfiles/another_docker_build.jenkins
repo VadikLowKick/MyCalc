@@ -30,7 +30,6 @@ pipeline {
             steps {
                 unstash 'calc-artifacts'
                 sh '''
-                    ./CalculatorTests
                     cd build/
                     ctest
                 '''
