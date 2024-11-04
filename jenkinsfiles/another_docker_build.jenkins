@@ -28,13 +28,13 @@ pipeline {
         }
         stage('Test') {
             steps {
-                step ('Compiling testlog'){
+                step {
                     sh '''
                         cd build/
                         ctest
                     '''
                 }
-                step('Work with unstash'){
+                step{
                     unstash 'calc-artifacts'
                     sh './CalculatorTests'
 
