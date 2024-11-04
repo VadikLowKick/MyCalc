@@ -31,11 +31,13 @@ pipeline {
                 unstash 'calc-artifacts'
                 sh '''
                     ./CalculatorTests
+                    cd build/
+                    ctest
                 '''
             }
             post {
               always {
-               //junit 'build/report.xml'
+               junit 'build/report.xml'
               }
             }
         }
