@@ -23,7 +23,7 @@ pipeline {
                     cmake -DBUILD_TESTS=ON ..
                     make
                 '''
-                stash name: 'build-artifacts', includes: 'libcalculator_lib.a, MyCalc, CalculatorTests'
+                stash name: 'build-artifacts', includes: 'build/libcalculator_lib.a, build/MyCalc, build/CalculatorTests'
             }
         }
         stage('Test') {
