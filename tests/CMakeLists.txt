@@ -1,8 +1,9 @@
 # Установка минимальной версии CMake для GoogleTest
 cmake_minimum_required(VERSION 3.10)
 
-# Подключение библиотеки GoogleTest
 include(FetchContent)
+set(FETCHCONTENT_UPDATES_DISCONNECTED TRUE)  # Отключаем автообновление
+
 FetchContent_Declare(
     googletest
     URL https://github.com/google/googletest/archive/refs/tags/release-1.12.1.zip
