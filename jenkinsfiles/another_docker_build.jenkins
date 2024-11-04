@@ -28,22 +28,29 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh '''
-                    cd build/
-                    ctest
-                '''
                 unstash 'calc-artifacts'
-                sh './CalculatorTests'
+                sh '''
+                    ./CalculatorTests
+                '''
             }
             post {
               always {
-               junit 'build/report.xml'
+               //junit 'build/report.xml'
               }
+            }
+        }
+        stage('Archive Artifacts') {
+            steps {
+                sh '''
+                    cd build/
+                    tar -czf artifacts.tar.gz libcalculator_lib.a MyCalc CalculatorTests
+                '''
             }
         }
     }
     post{
         always{
+            archiveArtifacts artifacts: 'build/artifacts.tar.gz'
             cleanWs()
         }
     }
