@@ -28,17 +28,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-                step {
-                    sh '''
-                        cd build/
-                        ctest
-                    '''
-                }
-                step{
-                    unstash 'calc-artifacts'
-                    sh './CalculatorTests'
-
-                }
+                sh '''
+                    cd build/
+                    ctest
+                '''
+                unstash 'calc-artifacts'
+                sh './CalculatorTests'
             }
             post {
               always {
