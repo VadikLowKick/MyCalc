@@ -28,6 +28,9 @@ pipeline {
         }
         stage('Test') {
             steps {
+                / Выводим список всех доступных стэшей
+                echo "Available stashes:"
+                sh 'ls -l $WORKSPACE/@tmp'
                 unstash 'calc-artifacts'
                 sh '''
                     ls -l
