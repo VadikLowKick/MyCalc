@@ -30,7 +30,7 @@ pipeline {
             steps {
                 // Выводим список всех доступных стэшей
                 echo "Available stashes:"
-                sh 'ls -l $WORKSPACE/@tmp'
+                sh 'ls -l $WORKSPACE/'
                 unstash 'calc-artifacts'
                 sh '''
                     ls -l
