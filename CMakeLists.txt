@@ -4,13 +4,17 @@ project(MyCalc)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+# Создаем статическую библиотеку из calculator.cpp
 
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
+add_library(calculator_lib STATIC src/calculator.cpp)
 
-include_directories(src)
+# Подключаем заголовочный файл к библиотеке
+target_include_directories(calculator_lib PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
-add_library(Calculator src/calculator.cpp)
+# Основной исполняемый файл, использующий библиотеку calculator_lib
+add_executable(MyCalc src/main.cpp)
+target_link_libraries(MyCalc PRIVATE calculator_lib)
+
 
 enable_testing()
 
@@ -18,7 +22,7 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(CalculatorTests tests/calculator_tests.cpp)
-target_link_libraries(CalculatorTests Calculator GTest::GTest GTest::Main)
+target_link_libraries(CalculatorTests calculator_lib GTest::GTest GTest::Main)
 
 add_test(NAME CalculatorTests COMMAND CalculatorTests --gtest_output=xml:report.xml)
 message("Report path: ${CMAKE_BINARY_DIR}/report.xml")
