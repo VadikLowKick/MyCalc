@@ -21,9 +21,10 @@ pipeline {
                     cd build
                     cmake -DBUILD_TESTS=ON ..
                     make
-                    tree
+                    ls -l
                 '''
                 stash name: 'calc-artifacts', includes: 'build/libcalculator_lib.a, build/MyCalc, build/CalculatorTests'
+                sh {'ls -l'}
             }
         }
 
