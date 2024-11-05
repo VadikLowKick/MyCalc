@@ -22,6 +22,7 @@ pipeline {
                     cmake -DBUILD_TESTS=ON ..
                     make
                 '''
+                stash name: 'calc-artifacts', includes: 'build/libcalculator_lib.a, build/MyCalc, build/CalculatorTests'
             }
         }
 
@@ -35,9 +36,9 @@ pipeline {
                         }
                     }
                     steps {
+                        unstash 'calc-artifacts'
                         sh '''
-                            cd build/
-                            ctest
+                            ./CalculatorTests
                         '''
                     }
                 }
@@ -49,9 +50,9 @@ pipeline {
                         }
                     }
                     steps {
+                        unstash 'calc-artifacts'
                         sh '''
-                            cd build/
-                            ctest
+                            ./CalculatorTests
                         '''
                     }
                     post{
