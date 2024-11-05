@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y \
     cmake \
     git \
     libgtest-dev \
+    tree\
     && apt-get clean
 
 # Google Test компилируется отдельно, его нужно собрать
