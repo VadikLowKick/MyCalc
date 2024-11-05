@@ -24,7 +24,6 @@ pipeline {
                     ls -l
                 '''
                 stash name: 'calc-artifacts', includes: 'build/libcalculator_lib.a, build/MyCalc, build/CalculatorTests'
-                sh {'ls -l'}
             }
         }
 
@@ -40,7 +39,7 @@ pipeline {
                     steps {
                         unstash 'calc-artifacts'
                         sh '''
-                            tree
+                            ls -l
                             .build/CalculatorTests
                         '''
                     }
@@ -55,7 +54,7 @@ pipeline {
                     steps {
                         unstash 'calc-artifacts'
                         sh '''
-                            tree
+                            ls -l
                             .build/CalculatorTests
                         '''
                     }
