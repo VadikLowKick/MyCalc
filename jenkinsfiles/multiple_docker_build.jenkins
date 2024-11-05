@@ -41,7 +41,7 @@ pipeline {
                         sh '''
                             cd build
                             ls -l
-                            ./build/CalculatorTests
+                            ./CalculatorTests
                         '''
                     }
                 }
@@ -57,7 +57,7 @@ pipeline {
                         sh '''
                             cd build
                             ls -l
-                            ./build/CalculatorTests
+                            ./CalculatorTests
                         '''
                     }
                     post{
