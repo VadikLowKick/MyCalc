@@ -16,7 +16,6 @@ pipeline {
                 }
             }
             steps {
-                cleanWs()
                 sh '''
                     mkdir build
                     cd build
