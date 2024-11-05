@@ -8,46 +8,48 @@ pipeline {
         timestamps()
     }
     stages {
-        parallel {
-            stage('Build Ubuntu') {
-                agent{
-                    dockerfile {
-                        filename 'Dockerfile_ubuntu'
-                        dir './docker'
+        stage('Build'){
+            parallel {
+                stage('Build Ubuntu') {
+                    agent{
+                        dockerfile {
+                            filename 'Dockerfile_ubuntu'
+                            dir './docker'
+                        }
+                    }
+                    steps {
+                        sh '''
+                            mkdir build
+                            cd build
+                            cmake -DBUILD_TESTS=ON ..
+                            make
+                        '''
+                    }
+                    post{
+                        always{
+                            cleanWs()
+                        }
                     }
                 }
-                steps {
-                    sh '''
-                        mkdir build
-                        cd build
-                        cmake -DBUILD_TESTS=ON ..
-                        make
-                    '''
-                }
-                post{
-                    always{
-                        cleanWs()
+                stage('Test Debian') {
+                    agent{
+                        dockerfile {
+                            filename 'Dockerfile_debian'
+                            dir './docker'
+                        }
                     }
-                }
-            }
-            stage('Test Debian') {
-                agent{
-                    dockerfile {
-                        filename 'Dockerfile_debian'
-                        dir './docker'
+                    steps {
+                        sh '''
+                            mkdir build
+                            cd build
+                            cmake -DBUILD_TESTS=ON ..
+                            make
+                        '''
                     }
-                }
-                steps {
-                    sh '''
-                        mkdir build
-                        cd build
-                        cmake -DBUILD_TESTS=ON ..
-                        make
-                    '''
-                }
-                post{
-                    always{
-                        cleanWs()
+                    post{
+                        always{
+                            cleanWs()
+                        }
                     }
                 }
             }
