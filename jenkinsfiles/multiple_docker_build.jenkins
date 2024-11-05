@@ -9,8 +9,25 @@ pipeline {
     }
     stages {
         stage('Build'){
+            agent{
+                dockerfile {
+                    filename 'Dockerfile_ubuntu'
+                    dir './docker'
+                }
+            }
+            steps {
+                sh '''
+                    mkdir build
+                    cd build
+                    cmake -DBUILD_TESTS=ON ..
+                    make
+                '''
+            }
+        }
+
+        stage('Test'){
             parallel {
-                stage('Build Ubuntu') {
+                stage('Test Ubuntu') {
                     agent{
                         dockerfile {
                             filename 'Dockerfile_ubuntu'
@@ -19,10 +36,8 @@ pipeline {
                     }
                     steps {
                         sh '''
-                            mkdir build
-                            cd build
-                            cmake -DBUILD_TESTS=ON ..
-                            make
+                            cd build/
+                            ctest
                         '''
                     }
                     post{
@@ -31,7 +46,7 @@ pipeline {
                         }
                     }
                 }
-                stage('Build Debian') {
+                stage('Test Debian') {
                     agent{
                         dockerfile {
                             filename 'Dockerfile_debian'
@@ -40,10 +55,8 @@ pipeline {
                     }
                     steps {
                         sh '''
-                            mkdir build
-                            cd build
-                            cmake -DBUILD_TESTS=ON ..
-                            make
+                            cd build/
+                            ctest
                         '''
                     }
                     post{
