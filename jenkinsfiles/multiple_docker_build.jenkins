@@ -1,6 +1,5 @@
 #!groovy
 // Run docker build
-properties([disableConcurrentBuilds()])
 
 pipeline {
     agent none
@@ -41,7 +40,6 @@ pipeline {
                 '''
             }
         }
-
     }
     post{
         always{
