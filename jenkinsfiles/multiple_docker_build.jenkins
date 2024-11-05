@@ -1,0 +1,51 @@
+!groovy
+// Run docker build
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent none
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    } 
+    stages {
+        stage('Build Ubuntu') {
+            agent{
+                dockerfile {
+                    filename 'Dockerfile_ubuntu'
+                    dir './docker'
+                }
+            }
+            steps {
+                sh '''
+                    mkdir build
+                    cd build
+                    cmake -DBUILD_TESTS=ON ..
+                    make
+                '''
+            }
+        }
+        stage('Build Debian') {
+            agent{
+                dockerfile {
+                    filename 'Dockerfile_debian'
+                    dir './docker'
+                }
+            }
+            steps {
+                sh '''
+                    mkdir build
+                    cd build
+                    cmake -DBUILD_TESTS=ON ..
+                    make
+                '''
+            }
+        }
+
+    }
+    post{
+        always{
+            cleanWs()
+        }
+    }
+}

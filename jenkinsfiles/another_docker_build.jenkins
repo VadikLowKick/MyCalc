@@ -5,7 +5,7 @@ properties([disableConcurrentBuilds()])
 pipeline {
     agent {
         dockerfile {
-            filename 'Dockerfile'
+            filename 'Dockerfile_ubuntu'
             dir './docker'
         }
     }
