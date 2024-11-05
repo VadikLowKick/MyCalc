@@ -23,10 +23,10 @@ pipeline {
                     make
                 '''
             }
-        }
-        post{
-            always{
-                cleanWs()
+            post{
+                always{
+                    cleanWs()
+                }
             }
         }
         stage('Test Debian') {
@@ -43,10 +43,10 @@ pipeline {
                     make
                 '''
             }
-        }
-        post{
-            always{
-                cleanWs()
+            post{
+                always{
+                    cleanWs()
+                }
             }
         }
     }
