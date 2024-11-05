@@ -24,6 +24,7 @@ pipeline {
                 '''
             }
         }
+
         stage('Test'){
             parallel {
                 stage('Test Ubuntu') {
@@ -54,13 +55,12 @@ pipeline {
                         '''
                     }
                 }
-            }  
-            post{
-                always{
-                cleanWs()
-                }
             }
         }
     }
-  
+    post{
+        always{
+            cleanWs()
+        }
+    }
 }
