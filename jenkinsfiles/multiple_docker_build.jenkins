@@ -38,7 +38,8 @@ pipeline {
                     steps {
                         unstash 'calc-artifacts'
                         sh '''
-                            ./CalculatorTests
+                            tree
+                            .build/CalculatorTests
                         '''
                     }
                 }
@@ -52,7 +53,8 @@ pipeline {
                     steps {
                         unstash 'calc-artifacts'
                         sh '''
-                            ./CalculatorTests
+                            tree
+                            .build/CalculatorTests
                         '''
                     }
                     post{
