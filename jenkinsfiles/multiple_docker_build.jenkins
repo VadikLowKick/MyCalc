@@ -10,8 +10,7 @@ pipeline {
     stages {
         stage('Build'){
             agent{
-                dockerfile { image 'ubuntu:22.04' }
-                }
+                dockerfile { image 'ubuntu:22.04'}
             }
             steps {
                 sh '''
@@ -28,7 +27,6 @@ pipeline {
                 stage('Test Ubuntu') {
                     agent{
                         dockerfile { image 'ubuntu:22.04'}
-                        }
                     }
                     steps {
                         sh '''
@@ -40,7 +38,6 @@ pipeline {
                 stage('Test Debian') {
                     agent{
                         dockerfile { image 'debian:latest'}
-                        }
                     }
                     steps {
                         sh '''
