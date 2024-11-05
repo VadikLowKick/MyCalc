@@ -24,7 +24,12 @@ pipeline {
                 '''
             }
         }
-        stage('Build Debian') {
+        post{
+            always{
+                cleanWs()
+            }
+        }
+        stage('Test Debian') {
             agent{
                 dockerfile {
                     filename 'Dockerfile_debian'
@@ -33,17 +38,16 @@ pipeline {
             }
             steps {
                 sh '''
-                    mkdir build
                     cd build
                     cmake -DBUILD_TESTS=ON ..
                     make
                 '''
             }
         }
-    }
-    post{
-        always{
-            cleanWs()
+        post{
+            always{
+                cleanWs()
+            }
         }
     }
 }
