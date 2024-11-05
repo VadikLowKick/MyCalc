@@ -31,7 +31,7 @@ pipeline {
                         }
                     }
                 }
-                stage('Test Debian') {
+                stage('Build Debian') {
                     agent{
                         dockerfile {
                             filename 'Dockerfile_debian'
