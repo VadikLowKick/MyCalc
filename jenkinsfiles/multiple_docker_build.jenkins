@@ -39,6 +39,7 @@ pipeline {
                     steps {
                         unstash 'calc-artifacts'
                         sh '''
+                            cd build
                             ls -l
                             .build/CalculatorTests
                         '''
@@ -54,6 +55,7 @@ pipeline {
                     steps {
                         unstash 'calc-artifacts'
                         sh '''
+                            cd build
                             ls -l
                             .build/CalculatorTests
                         '''
