@@ -17,13 +17,13 @@ pipeline {
             }
             steps {
                 sh '''
+                    mkdir build
                     cd build
                     cmake -DBUILD_TESTS=ON ..
                     make
                 '''
             }
         }
-
         stage('Test'){
             parallel {
                 stage('Test Ubuntu') {
@@ -54,12 +54,13 @@ pipeline {
                         '''
                     }
                 }
+            }  
+            post{
+                always{
+                cleanWs()
+                }
             }
         }
-    post{
-        always{
-            cleanWs()
-        }
     }
-    }
+  
 }
