@@ -38,6 +38,7 @@ pipeline {
             }
             steps {
                 sh '''
+                    mkdir build
                     cd build
                     cmake -DBUILD_TESTS=ON ..
                     make
