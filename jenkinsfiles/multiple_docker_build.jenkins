@@ -10,9 +10,7 @@ pipeline {
     stages {
         stage('Build'){
             agent{
-                dockerfile {
-                    filename 'Dockerfile_ubuntu'
-                    dir './docker'
+                dockerfile { image 'ubuntu:22.04' }
                 }
             }
             steps {
@@ -29,9 +27,7 @@ pipeline {
             parallel {
                 stage('Test Ubuntu') {
                     agent{
-                        dockerfile {
-                            filename 'Dockerfile_ubuntu'
-                            dir './docker'
+                        dockerfile { image 'ubuntu:22.04'}
                         }
                     }
                     steps {
@@ -43,9 +39,7 @@ pipeline {
                 }
                 stage('Test Debian') {
                     agent{
-                        dockerfile {
-                            filename 'Dockerfile_debian'
-                            dir './docker'
+                        dockerfile { image 'debian:latest'}
                         }
                     }
                     steps {
