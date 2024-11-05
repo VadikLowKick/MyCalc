@@ -40,11 +40,6 @@ pipeline {
                             ctest
                         '''
                     }
-                    post{
-                        always{
-                            cleanWs()
-                        }
-                    }
                 }
                 stage('Test Debian') {
                     agent{
@@ -59,13 +54,13 @@ pipeline {
                             ctest
                         '''
                     }
-                    post{
-                        always{
-                            cleanWs()
-                        }
-                    }
                 }
             }
+        }
+    }
+    post{
+        always{
+            cleanWs()
         }
     }
 }
